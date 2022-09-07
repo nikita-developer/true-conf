@@ -1,0 +1,14 @@
+.elevator {
+    width: 150px;
+    border-right: 2px solid rgb(158, 158, 158);
+    border-left: 2px solid rgb(158, 158, 158);
+
+    &__box {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 20%;
+        background-color: #000;
+    }
+}

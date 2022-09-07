@@ -1,15 +1,18 @@
 <template>
-  <main>
-
-  </main>
+	<main>
+		<Hall></Hall>
+	</main>
 </template>
 
 <script>
-  export default {
-    
-  }
+	import Hall from './components/Hall/Hall.vue';
+	export default {
+		components: {
+			Hall
+		}
+	}
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+	@import 'styles/main.scss';
 </style>
