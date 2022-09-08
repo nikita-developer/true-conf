@@ -12,13 +12,10 @@
 			</Pagination>
 		</div>
 		<Elevator
-			v-for="elevator in elevators"
-			:key="elevator.id"
 			:steps="steps"
 			:delay="delay"
 			:duration="duration"
-			:pagination_counter="pagination_counter"
-			:elevator="elevator"
+			:step="step"
 			class="hall__elevator"
 		>
 		</Elevator>
@@ -38,19 +35,13 @@
 				steps: 5,
 				delay: 3000,
 				duration: 1000,
-				pagination_counter: 1,
-				elevators: [
-					{
-						id: 0,
-						step: 0,
-					}
-				]
+				step: 3,
 			}
 		},
 		methods: {
 			paginationActive(index) {
-				this.pagination_counter = index
-			}
+				this.step = index
+			},
 		}
 	}
 </script>

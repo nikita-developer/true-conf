@@ -8,7 +8,7 @@
     export default {
         data() {
             return {
-                height: 0
+                height: 0,
             }
         },
         props: {
@@ -24,29 +24,26 @@
                 type: Number,
                 default: 1000,
             },
-			pagination_counter: {
+            step: {
                 type: Number,
                 default: 1,
             },
-            elevator: {
-                type: Object,
-                default: {},
-            },
         },
         methods: {
-            elevatorEvents() {
-                let result = 0
-                for (let i = 1; i < this.pagination_counter; i++) {
+            elevatorEvents(result = 0) {
+                for (let i = 1; i < this.step; i++) {
                     result = result + 100 / this.steps
                 }
-                console.log(result);
-                return this.height = result;
+                return this.height = result
             }
         },
         watch: {
-            pagination_counter: function () {
+            step() {
                 this.elevatorEvents()
             }
+        },
+        mounted() {
+            this.elevatorEvents()
         },
     }
 </script>
