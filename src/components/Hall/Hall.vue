@@ -1,9 +1,27 @@
 <template>
 	<div class="hall">
-		<div class="hall__row" v-for="(step, index) in steps" :key="step">
-			<Pagination class="hall__pagination" @paginationActive="paginationActive" :index="index"></Pagination>
+		<div class="hall__row"
+			v-for="(step, index) in steps"
+			:key="step"
+		>
+			<Pagination
+				@paginationActive="paginationActive"
+				:index="index"
+				class="hall__pagination"
+			>
+			</Pagination>
 		</div>
-		<Elevator :elevators="elevators" class="hall__elevator"></Elevator>
+		<Elevator
+			v-for="elevator in elevators"
+			:key="elevator.id"
+			:steps="steps"
+			:delay="delay"
+			:duration="duration"
+			:pagination_counter="pagination_counter"
+			:elevator="elevator"
+			class="hall__elevator"
+		>
+		</Elevator>
 	</div>
 </template>
 
@@ -20,7 +38,7 @@
 				steps: 5,
 				delay: 3000,
 				duration: 1000,
-				pagination_counter: null,
+				pagination_counter: 1,
 				elevators: [
 					{
 						id: 0,

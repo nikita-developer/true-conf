@@ -10,7 +10,7 @@
         },
         methods: {
             eventActive() {
-                this.$emit('paginationActive', this.index)
+                this.$emit('paginationActive', this.index + 1)
             }
         }
     }
