@@ -15,7 +15,7 @@
 		<div class="hall__row">
 			<Pagination class="hall__pagination"></Pagination>
 		</div>
-		<Elevator class="hall__elevator"></Elevator>
+		<Elevator v-for="elem in elevators" :key="elem.id" class="hall__elevator"></Elevator>
 	</div>
 </template>
 
@@ -26,6 +26,19 @@
 		components: {
 			Elevator,
 			Pagination
+		},
+		data() {
+			return {
+				steps: 5,
+				delay: 3000,
+				duration: 1000,
+				elevators: [
+					{
+						id: 0,
+						step: 0,
+					}
+				]
+			}
 		}
 	}
 </script>
