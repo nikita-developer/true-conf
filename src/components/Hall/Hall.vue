@@ -1,21 +1,9 @@
 <template>
 	<div class="hall">
-		<div class="hall__row">
-			<Pagination class="hall__pagination"></Pagination>
+		<div class="hall__row" v-for="(step, index) in steps" :key="step">
+			<Pagination class="hall__pagination" @paginationActive="paginationActive" :index="index"></Pagination>
 		</div>
-		<div class="hall__row">
-			<Pagination class="hall__pagination"></Pagination>
-		</div>
-		<div class="hall__row">
-			<Pagination class="hall__pagination"></Pagination>
-		</div>
-		<div class="hall__row">
-			<Pagination class="hall__pagination"></Pagination>
-		</div>
-		<div class="hall__row">
-			<Pagination class="hall__pagination"></Pagination>
-		</div>
-		<Elevator v-for="elem in elevators" :key="elem.id" class="hall__elevator"></Elevator>
+		<Elevator :elevators="elevators" class="hall__elevator"></Elevator>
 	</div>
 </template>
 
@@ -32,12 +20,18 @@
 				steps: 5,
 				delay: 3000,
 				duration: 1000,
+				pagination_counter: null,
 				elevators: [
 					{
 						id: 0,
 						step: 0,
 					}
 				]
+			}
+		},
+		methods: {
+			paginationActive(index) {
+				this.pagination_counter = index
 			}
 		}
 	}
