@@ -35,7 +35,7 @@
 				steps: 5,
 				delay: 3000,
 				duration: 1000,
-				step: 3,
+				step: 1,
 			}
 		},
 		methods: {
