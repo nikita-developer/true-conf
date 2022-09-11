@@ -6,7 +6,9 @@
                 transition: seconds() + 's bottom linear',
                 height: elevatorHeight() + '%',
             }"
-            class="elevator__box">
+            class="elevator__box"
+        >
+            <div class="elevator__info">{{info}}</div>
         </div>
     </div>
 </template>
@@ -18,6 +20,7 @@
                 bottom: 0,
                 is_finik: true,
                 history: [],
+                info: 'Без работы'
             }
         },
         props: {
@@ -58,14 +61,37 @@
                 return this.bottom = result
             },
 
+            // выводим информацию о местонахождении лифта)
+            thisFloorInfo(oldFloor, newFloor, result) {
+                oldFloor > newFloor ? result = oldFloor - newFloor : result = newFloor - oldFloor
+                this.info = oldFloor
+                newFloor > oldFloor ? this.info = oldFloor++ : this.info = oldFloor--
+
+                let logInfo = setInterval(() => {
+                    newFloor > oldFloor ? this.info = oldFloor++ : this.info = oldFloor--
+                }, this.duration / result)
+
+                setTimeout(() => {
+                    clearInterval(logInfo)
+                }, this.duration)
+            },
+
             // 4 лифт по вызову =)
-            nex_step(step) {
+            nex_step(step, oldFloor) {
 
                 // говорим что лифт занят
                 this.is_finik = false
 
                 // 5 говорим на какой этаж двигаться
                 this.operation(step)
+
+                // выводим информацию о местонахождении лифта)
+                this.thisFloorInfo(oldFloor, step)
+
+                // ждем
+                setTimeout(() => {
+                    this.info = "Ждемс"
+                }, this.duration + 500)
 
                 setTimeout(() => {
                     // если в очереди еще есть вызовы, то выпоняем их
@@ -85,10 +111,10 @@
             }
         },
         watch: {
-            step() {
+            step(newValue, oldValue) {
                 // 1 пушим вызов лифта
                 let counter = this.step
-                this.history.push(() => this.nex_step(counter))
+                this.history.push(() => this.nex_step(counter, oldValue))
 
                 // 2 если лифт на расслабоне
                 if(this.is_finik) {
@@ -97,6 +123,11 @@
             }
 
         },
+        mounted() {
+            this.operation(this.step)
+            this.seconds()
+            this.elevatorHeight()
+        }
     }
 </script>
 
