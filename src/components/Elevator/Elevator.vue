@@ -126,8 +126,10 @@
                 if(this.is_finik) {
                     this.next_floor()
                 }
+            },
+            steps() {
+                this.operation(this.step)
             }
-
         },
         mounted() {
             this.operation(this.step)
