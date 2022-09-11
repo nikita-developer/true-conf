@@ -18,7 +18,7 @@
         data() {
             return {
                 bottom: 0,
-                is_finik: true,
+                is_finish: true,
                 history: [],
                 info: 'Без работы',
                 time: null
@@ -63,9 +63,10 @@
             },
 
             // выводим информацию о местонахождении лифта)
-            thisFloorInfo(oldFloor, newFloor, result) {
-                oldFloor > newFloor ? result = oldFloor - newFloor : result = newFloor - oldFloor
+            thisFloorInfo(oldFloor, newFloor) {
+                let result = Math.abs(oldFloor - newFloor)
                 this.info = oldFloor
+
                 newFloor > oldFloor ? this.info = oldFloor++ : this.info = oldFloor--
 
                 let logInfo = setInterval(() => {
@@ -78,10 +79,10 @@
             },
 
             // 4 лифт по вызову =)
-            nex_step(step, oldFloor) {
+            next_step(step, oldFloor) {
 
                 // говорим что лифт занят
-                this.is_finik = false
+                this.is_finish = false
 
                 // 5 говорим на какой этаж двигаться
                 this.operation(step)
@@ -93,7 +94,7 @@
 
                 // ждем
                 setTimeout(() => {
-                    this.info = "Жду"
+                    this.info = "Ждемс"
                 }, this.time + 500)
 
                 setTimeout(() => {
@@ -102,7 +103,7 @@
                         this.next_floor()
                     } else {
                         // если в очереди нет вызовов, то лифт чилит
-                        this.is_finik = true
+                        this.is_finish = true
                     }
                     this.$emit('removeActivePagination', step)
                 }, this.time + this.delay)
@@ -118,12 +119,13 @@
             step(newValue, oldValue) {
                 // 1 пушим вызов лифта
                 let counter = this.step
-                this.history.push(() => this.nex_step(counter, oldValue))
+                this.history.push(() => this.next_step(counter, oldValue))
 
+                // добавляем мигание кнопке
                 this.$emit('addActivePagination', counter)
 
                 // 2 если лифт на расслабоне
-                if(this.is_finik) {
+                if(this.is_finish) {
                     this.next_floor()
                 }
             },

@@ -47,10 +47,10 @@
 		},
 		data() {
 			return {
-				steps: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).steps : 4,
-				delay: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).delay : 3000,
-				duration: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).duration : 1000,
-				step: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).step : 1,
+				steps: null,
+				delay: null,
+				duration: null,
+				step: null,
 				addIsActivePagination: null,
 				removeIsActivePagination: null,
 				localStorageOption: null,
@@ -75,10 +75,24 @@
 			hallRowHeight() {
                 return 100 / this.steps
             },
+			localStorageOperations() {
+				if(localStorage.getItem('Настройки лифта')) {
+					this.steps = JSON.parse(localStorage.getItem('Настройки лифта')).steps
+					this.delay = JSON.parse(localStorage.getItem('Настройки лифта')).delay
+					this.duration = JSON.parse(localStorage.getItem('Настройки лифта')).duration
+					this.step = JSON.parse(localStorage.getItem('Настройки лифта')).step
+				} else {
+					this.steps = 4
+					this.delay = 3000
+					this.duration = 1000
+					this.step = 1
+				}
+			}
 		},
-		mounted() {
-            this.hallRowHeight()
-        }
+		beforeMount() {
+			this.localStorageOperations()
+			this.hallRowHeight()
+		},
 	}
 </script>
 
