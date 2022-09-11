@@ -1,6 +1,13 @@
 <template>
     <div class="elevator">
-        <div :style="{bottom: height + '%', transition: seconds() + 's bottom linear'}" class="elevator__box"></div>
+        <div
+            :style="{
+                bottom: bottom + '%',
+                transition: seconds() + 's bottom linear',
+                height: elevatorHeight() + '%',
+            }"
+            class="elevator__box">
+        </div>
     </div>
 </template>
 
@@ -8,7 +15,7 @@
     export default {
         data() {
             return {
-                height: 0,
+                bottom: 0,
                 is_finik: true,
                 history: [],
             }
@@ -37,13 +44,18 @@
                 return (this.duration / 1000) %60
             },
 
+            // высота лифта
+            elevatorHeight() {
+                return 100 / this.steps
+            },
+
             // что-то сложное которое говорит на сколько процентов подниматься
             operation(step) {
                 let result = 0;
                 for (let i = 1; i < step; i++) {
                     result = result + 100 / this.steps
                 }
-                return this.height = result
+                return this.bottom = result
             },
 
             // 4 лифт по вызову =)
@@ -75,7 +87,8 @@
         watch: {
             step() {
                 // 1 пушим вызов лифта
-                this.history.push(() => this.nex_step(this.step))
+                let counter = this.step
+                this.history.push(() => this.nex_step(counter))
 
                 // 2 если лифт на расслабоне
                 if(this.is_finik) {

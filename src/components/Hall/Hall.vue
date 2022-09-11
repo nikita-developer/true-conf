@@ -32,7 +32,7 @@
 		},
 		data() {
 			return {
-				steps: 5,
+				steps: 8,
 				delay: 3000,
 				duration: 1000,
 				step: 1,

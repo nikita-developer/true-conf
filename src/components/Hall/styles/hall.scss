@@ -25,7 +25,8 @@
 
     &__pagination {
         position: absolute;
-        top: calc(50% - 50px);
+        top: calc(50%);
+        transform: translateY(-50%);
         margin-left: 180px;
     }
 }
