@@ -20,7 +20,8 @@
                 bottom: 0,
                 is_finik: true,
                 history: [],
-                info: 'Без работы'
+                info: 'Без работы',
+                time: null
             }
         },
         props: {
@@ -44,7 +45,7 @@
         methods: {
             // миллисекунды в секунды
             seconds() {
-                return (this.duration / 1000) %60
+                return (this.time / 1000) %60
             },
 
             // высота лифта
@@ -69,11 +70,11 @@
 
                 let logInfo = setInterval(() => {
                     newFloor > oldFloor ? this.info = oldFloor++ : this.info = oldFloor--
-                }, this.duration / result)
+                }, this.time / result)
 
                 setTimeout(() => {
                     clearInterval(logInfo)
-                }, this.duration)
+                }, this.time)
             },
 
             // 4 лифт по вызову =)
@@ -85,13 +86,15 @@
                 // 5 говорим на какой этаж двигаться
                 this.operation(step)
 
+                oldFloor > step ? this.time = (oldFloor - step) * this.duration : this.time = (step - oldFloor) * this.duration
+
                 // выводим информацию о местонахождении лифта)
                 this.thisFloorInfo(oldFloor, step)
 
                 // ждем
                 setTimeout(() => {
                     this.info = "Жду"
-                }, this.duration + 500)
+                }, this.time + 500)
 
                 setTimeout(() => {
                     // если в очереди еще есть вызовы, то выпоняем их
@@ -102,7 +105,7 @@
                         this.is_finik = true
                     }
                     this.$emit('removeActivePagination', step)
-                }, this.delay)
+                }, this.time + this.delay)
             },
 
             // 3 удаляем первый элемент и запускаем функцию
