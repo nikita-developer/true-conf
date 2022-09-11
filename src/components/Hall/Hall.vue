@@ -1,5 +1,14 @@
 <template>
 	<div class="hall">
+		<Options
+			:steps:="steps"
+			:delay:="delay"
+			:duration:="duration"
+			:step:="step"
+			class="hall__options"
+		>
+
+		</Options>
 		<div class="hall__row"
 			v-for="(step, index) in steps"
 			:key="step"
@@ -29,11 +38,13 @@
 <script>
 	import Elevator from '../Elevator/Elevator.vue';
 	import Pagination from '../Pagination/Pagination.vue';
+import Options from '../Options/Options.vue';
 	export default {
 		components: {
-			Elevator,
-			Pagination
-		},
+    Elevator,
+    Pagination,
+    Options
+},
 		data() {
 			return {
 				steps: 8,
