@@ -47,12 +47,13 @@
 		},
 		data() {
 			return {
-				steps: 8,
-				delay: 3000,
-				duration: 1000,
-				step: 1,
+				steps: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).steps : 4,
+				delay: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).delay : 3000,
+				duration: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).duration : 1000,
+				step: localStorage.getItem('Настройки лифта') ? JSON.parse(localStorage.getItem('Настройки лифта')).step : 1,
 				addIsActivePagination: null,
 				removeIsActivePagination: null,
+				localStorageOption: null,
 			}
 		},
 		methods: {

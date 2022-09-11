@@ -64,6 +64,14 @@
                     step: this.newStep,
                 }
                 this.$emit('newDataOptions', dataOptions)
+
+                var optionsData = {
+                    steps: this.newSteps,
+                    delay: this.newDelay,
+                    duration: this.newDuration,
+                    step: this.newStep,
+                };
+                localStorage.setItem('Настройки лифта', JSON.stringify(optionsData) );
             }
         }
     }
