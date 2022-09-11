@@ -101,6 +101,7 @@
                         // если в очереди нет вызовов, то лифт чилит
                         this.is_finik = true
                     }
+                    this.$emit('removeActivePagination', step)
                 }, this.delay)
             },
 
@@ -115,6 +116,8 @@
                 // 1 пушим вызов лифта
                 let counter = this.step
                 this.history.push(() => this.nex_step(counter, oldValue))
+
+                this.$emit('addActivePagination', counter)
 
                 // 2 если лифт на расслабоне
                 if(this.is_finik) {

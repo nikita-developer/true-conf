@@ -6,12 +6,16 @@
 		>
 			<Pagination
 				@paginationActive="paginationActive"
+				:addIsActivePagination="addIsActivePagination"
+				:removeIsActivePagination="removeIsActivePagination"
 				:index="index"
 				class="hall__pagination"
 			>
 			</Pagination>
 		</div>
 		<Elevator
+			@addActivePagination="addActivePagination"
+			@removeActivePagination="removeActivePagination"
 			:steps="steps"
 			:delay="delay"
 			:duration="duration"
@@ -36,11 +40,19 @@
 				delay: 3000,
 				duration: 1000,
 				step: 1,
+				addIsActivePagination: null,
+				removeIsActivePagination: null,
 			}
 		},
 		methods: {
 			paginationActive(index) {
 				this.step = index
+			},
+			addActivePagination(step) {
+				this.addIsActivePagination = step
+			},
+			removeActivePagination(step) {
+				this.removeIsActivePagination = step
 			},
 		}
 	}

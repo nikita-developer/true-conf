@@ -6,6 +6,18 @@
     border-radius: 5px;
     cursor: pointer;
 
+    &.active {
+        animation: pulse-border 1s linear infinite;
+
+        &::after {
+            animation: pulse-border 1s linear infinite;
+        }
+
+        &::before {
+            animation: pulse-background 1s linear infinite;
+        }
+    }
+
     &::before {
         position: absolute;
         top: 50%;
@@ -28,5 +40,25 @@
         border-radius: 50%;
         content: '';
         border: 1px solid #000;
+    }
+
+    @keyframes pulse-border {
+        from {
+            border-color: red;
+        }
+
+        to {
+            border-color: black;
+        }
+    }
+
+    @keyframes pulse-background {
+        from {
+            background-color: red;
+        }
+
+        to {
+            background-color: black;
+        }
     }
 }
