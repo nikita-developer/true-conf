@@ -90,7 +90,7 @@
 
                 // ждем
                 setTimeout(() => {
-                    this.info = "Ждемс"
+                    this.info = "Жду"
                 }, this.duration + 500)
 
                 setTimeout(() => {
